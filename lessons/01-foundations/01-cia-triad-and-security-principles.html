@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: CIA Triad & Security Principles</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #2c3e50;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .exercise {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        .resources {
+            background-color: #f0f8f0;
+            border-left: 4px solid #27ae60;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lesson 1: CIA Triad & Security Principles</h1>
+        <p class="subtitle">For: Shaik Obydullah | Focus: Building on Full-Stack Development Background</p>
+
+        <h2>Learning Objectives</h2>
+        <p>By the end of this lesson, you should be able to:</p>
+        <ul>
+            <li>Explain the CIA Triad (Confidentiality, Integrity, Availability) and apply it to web applications</li>
+            <li>Understand common security principles (Least Privilege, Defense in Depth, Fail Securely)</li>
+            <li>Identify real-world security issues in Laravel/WordPress applications</li>
+            <li>Apply a security mindset to your existing ERP/MIS projects</li>
+        </ul>
+
+        <h2>1. The CIA Triad</h2>
+        <p>The CIA Triad is the foundation of information security. As a full-stack developer building ERPs and MIS systems, you already deal with these concepts daily.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Principle</th>
+                    <th>Definition</th>
+                    <th>Web App Example</th>
+                    <th>How You Can Apply</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Confidentiality</strong></td>
+                    <td>Ensuring only authorized users can access sensitive data</td>
+                    <td>Customer PII, salary data, migration records in BRAC MIS</td>
+                    <td>Use proper authentication, encryption (TLS/HTTPS), role-based access control</td>
+                </tr>
+                <tr>
+                    <td><strong>Integrity</strong></td>
+                    <td>Ensuring data is accurate and hasn't been tampered with</td>
+                    <td>Financial transactions in ERP, invoice totals, inventory counts</td>
+                    <td>Use CSRF protection, input validation, audit trails, database constraints</td>
+                </tr>
+                <tr>
+                    <td><strong>Availability</strong></td>
+                    <td>Ensuring systems are accessible when needed</td>
+                    <td>Restaurant POS during peak hours, ISP billing system uptime</td>
+                    <td>Rate limiting, backups, DDoS mitigation, proper error handling, caching</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Core Security Principles</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Principle</th>
+                    <th>Explanation</th>
+                    <th>Laravel/WordPress Application</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Least Privilege (PoLP)</strong></td>
+                    <td>Users/processes should only have minimum permissions needed</td>
+                    <td>In Laravel, use Policies/Gates properly. Don't give admin role to all users. In WordPress, use appropriate user roles/capabilities.</td>
+                </tr>
+                <tr>
+                    <td><strong>Defense in Depth</strong></td>
+                    <td>Multiple layers of security (no single point of failure)</td>
+                    <td>Combine auth, validation, HTTPS, WAF, rate limiting, RBAC. Like securing your ERP with multiple controls.</td>
+                </tr>
+                <tr>
+                    <td><strong>Fail Securely</strong></td>
+                    <td>If something fails, it should fail in a secure state</td>
+                    <td>Don't expose stack traces in production. Return generic errors. Handle auth failures without leaking info.</td>
+                </tr>
+                <tr>
+                    <td><strong>Separation of Duties</strong></td>
+                    <td>No single person should have control over all critical functions</td>
+                    <td>In your ERP, separate cashier, manager, and admin permissions. Different roles for different operations.</td>
+                </tr>
+                <tr>
+                    <td><strong>Secure by Default</strong></td>
+                    <td>Systems should be secure out of the box</td>
+                    <td>Laravel's default protections (CSRF, password hashing with bcrypt/Argon2) - use them! Don't disable security features.</td>
+                </tr>
+                <tr>
+                    <td><strong>Economy of Mechanism</strong></td>
+                    <td>Keep security simple and easy to understand</td>
+                    <td>Avoid overcomplicating auth. Simple, well-tested Laravel auth is better than custom complex solutions.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Connecting to Your Experience</h2>
+        <p>Looking at your projects, here are security considerations:</p>
+        <ul>
+            <li><strong>ERP System:</strong> Multi-vendor marketplace needs strong tenant isolation. Ensure vendors can only access their own data (authorization). Watch for IDOR vulnerabilities.</li>
+            <li><strong>BRAC MIS:</strong> Handles sensitive migrant worker data. Requires strict RBAC, audit logging (you have this!), and data encryption. Critical for confidentiality.</li>
+            <li><strong>Restaurant POS Lite:</strong> Financial transactions require integrity. Ensure order totals can't be manipulated, implement proper permissions.</li>
+            <li><strong>Ollama AI Integration:</strong> New attack surface - prompt injection, data leakage. Needs careful input sanitization.</li>
+        </ul>
+
+        <div class="exercise">
+            <h2>4. Hands-On Exercise</h2>
+            
+            <h3>Task 1: Security Audit Mindset</h3>
+            <p>Pick one of your Laravel projects. Review a route/controller and ask:</p>
+            <ol>
+                <li>Does this endpoint check authentication?</li>
+                <li>Does it check authorization (can this user access this resource)?</li>
+                <li>Is input validated?</li>
+                <li>Could a user access another user's data by changing IDs in URL?</li>
+            </ol>
+
+            <h3>Task 2: Map CIA to a Feature</h3>
+            <p>Take "Create Invoice" in your ERP/POS:</p>
+            <ul>
+                <li><strong>Confidentiality:</strong> Who can see invoices?</li>
+                <li><strong>Integrity:</strong> Can invoice amounts be tampered with?</li>
+                <li><strong>Availability:</strong> What if database goes down during checkout?</li>
+            </ul>
+
+            <h3>Task 3: Identify Violations</h3>
+            <p>Look for these anti-patterns in your code:</p>
+            <ul>
+                <li>Using <code>find($id)</code> without checking ownership</li>
+                <li>Exposing user IDs in URLs without authorization checks</li>
+                <li>Returning all model data including hidden fields</li>
+                <li>Trusting client-side validation only</li>
+            </ul>
+        </div>
+
+        <div class="resources">
+            <h2>5. Resources</h2>
+            <ul>
+                <li><a href="https://owasp.org/www-community/controls/">OWASP - Security Fundamentals</a></li>
+                <li><a href="https://www.cisa.gov/resources-tools/resources/cybersecurity-basics">CISA - Cybersecurity Basics</a></li>
+                <li><a href="https://portswigger.net/web-security/access-control">PortSwigger - Access Control</a> (You'll revisit this later)</li>
+                <li><a href="https://laravel.com/docs/security">Laravel Security Best Practices</a></li>
+            </ul>
+        </div>
+
+        <h2>Next Lesson</h2>
+        <p><strong>Lesson 2:</strong> Networking Basics for Web Application Security - HTTP, HTTPS, Headers, and how browsers communicate with your Laravel apps.</p>
+    </div>
+</body>
+</html>
